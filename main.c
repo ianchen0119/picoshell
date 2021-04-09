@@ -47,6 +47,7 @@ static int is_special(int c)
  */
 static void run(char *c, int t)
 {
+    size_t length;
     char *redir_stdin = NULL, *redir_stdout = NULL;
     int pipefds[2] = {0, 0}, outfd = 0;
     char *v[99] = {0};
@@ -56,8 +57,19 @@ static void run(char *c, int t)
         if (is_delim(*c)) /* if NULL (start of string) or pipe: break */
             break;
         if (!is_special(*c)) {
-            c++;    /* Copy word of regular chars into previous u */
-            XXXXX /* 在此提交你的程式碼 */
+            /* Copy word of regular chars into previous u */
+            /* 在此提交你的程式碼 */
+            length = 0;
+            while(!is_special(*c)){
+                length++;
+                c--;
+            }
+            u--;
+            *u = malloc(sizeof(char)*length+1);
+            c++;
+            strncpy(*u, c, length);
+            u[length] = '\0';
+            /* 目前補到這 */
         }
         if (is_redir(*c)) { /* If < or > */
             if (*c == '<')
@@ -114,6 +126,9 @@ static void run(char *c, int t)
         fatal(creat(redir_stdout, 438), 1); /* replace stdout with redir */
     }
     fatal(execvp(*u, u), 1);
+    for(int i =0;i<99;i++){
+	    free(v[i]);s
+    }
 }
 
 int main()
