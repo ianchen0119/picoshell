@@ -65,7 +65,6 @@ static void run(char *c, int t)
                 c--;
             }
             u--;
-            *u = malloc(sizeof(char)*length+1);
             c++;
             strncpy(*u, c, length);
             u[length] = '\0';
@@ -126,9 +125,6 @@ static void run(char *c, int t)
         fatal(creat(redir_stdout, 438), 1); /* replace stdout with redir */
     }
     fatal(execvp(*u, u), 1);
-    for(int i =0;i<99;i++){
-	    free(v[i]);s
-    }
 }
 
 int main()
